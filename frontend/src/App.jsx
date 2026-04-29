@@ -6,6 +6,8 @@ import {
 } from 'lucide-react';
 import { createChart } from 'lightweight-charts';
 
+const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8080';
+
 // ─── Chart Component ────────────────────────────────────────────────────────
 const LightweightChart = ({ data, lines, className = "chart-container" }) => {
   const containerRef = useRef();
@@ -386,7 +388,7 @@ export default function App() {
   const handleScan = async () => {
     setLoading(true); setError(null);
     try {
-      const res = await axios.get('http://localhost:8080/api/scan');
+      const res = await axios.get(`${API_BASE}/api/scan`);
       setResults(res.data);
       setLastScan(new Date().toLocaleTimeString());
       setActiveCategory('All');
